@@ -1,15 +1,25 @@
 import React from 'react'
-
+import { useState } from 'react';
+import SubmittedThanks from '../SubmittedThanks';
 
 function FormCard  ({register,onSubmit, handleSubmit,errors, watch})  {
- 
+  const [formSubmitted, setFormSubmitted] = useState(false); // Estado para controlar si el formulario se ha enviado
+
   const isNumeric = (value) =>/^[0-9]+$/.test(value);
   const hasOnlyLetters = (value) => /^[a-zA-Z\s]*$/.test(value);
   
+  const handleFormSubmit = (data) => {
+    onSubmit(data); // Lógica para enviar el formulario
+    setFormSubmitted(true); // Establece el estado como enviado
+  };
+
+  if (formSubmitted) {
+    return <SubmittedThanks/>
+  }
 
   return (
     <div className='pl-[50px] w-[70%] flex  justify-center items-center'>
-    <form  onSubmit={handleSubmit(onSubmit)} className='w-[380px] flex flex-col text-start'>
+    <form  onSubmit={handleSubmit(handleFormSubmit)} className='w-[380px] flex flex-col text-start'>
       <label  >CARDHOLDER NAME</label>
       <input type="text" placeholder="e.g. Jane Appleseed" {...register("name", {required: true,validate: {
               isAlpha: (value) => hasOnlyLetters(value),
