@@ -18,7 +18,7 @@ function FormCard  ({register,onSubmit, handleSubmit,errors, watch})  {
   }
 
   return (
-    <div className='pl-[50px] w-[70%] flex  justify-center items-center'>
+    <div className='pl-[50px] w-[70%] sm:w-full sm:px-[22px] sm:mb-[30px] sm:z-[2] flex  justify-center items-center sm:mt-[90px]'>
     <form  onSubmit={handleSubmit(handleFormSubmit)} className='w-[380px] flex flex-col text-start'>
       <label  >CARDHOLDER NAME</label>
       <input type="text" placeholder="e.g. Jane Appleseed" {...register("name", {required: true,validate: {
@@ -86,7 +86,7 @@ function FormCard  ({register,onSubmit, handleSubmit,errors, watch})  {
      </div>
     
       </div>
-      <input className='input-confirm bg-Very-dark-violet text-White font-700' type="submit" value="Confirm" />
+      <input className='input-confirm bg-Very-dark-violet text-White font-700 mt-[30px]' type="submit" value="Confirm" />
     </form>
   
           </div>
