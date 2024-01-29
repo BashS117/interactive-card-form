@@ -23,59 +23,70 @@ function FormCard  ({register,onSubmit, handleSubmit,errors, watch})  {
       <label  >CARDHOLDER NAME</label>
       <input type="text" placeholder="e.g. Jane Appleseed" {...register("name", {required: true,validate: {
               isAlpha: (value) => hasOnlyLetters(value),
-            },})} />
-      {errors.name?.type === 'required' && <p>can't be blanc</p>}
-      {errors.name?.type === 'isAlpha' && <p className='text-Red'>Wrong format, letters only</p>}
+            },})}
+            className={errors.name ? 'border border-Red' : ''}
+
+            />
+      {errors.name?.type === 'required' && <span className='text-Red'>Can't be blank</span>}
+      {errors.name?.type === 'isAlpha' && <span className='text-Red'>Wrong format, letters only</span>}
 
 
 
-      <label >CARD NUMBER</label>
+      <label className='mt-[18px]' >CARD NUMBER</label>
       <input type="text" placeholder="e.g. 1234 5678 9123 0000"  maxLength={16} {...register("number", {required: true, validate: {
               inNumeric: (value) => isNumeric(value),
-            }, maxLength: 16,minLength:16})} />
-      {errors.number?.type === 'maxLength' && <p>el campo debe tener 16 caracteres</p>}
-      {errors.number?.type === 'inNumeric' && <p className='text-Red'>Wrong format, numbers only</p>}
+            }, maxLength: 16,minLength:16})}
+            
+            className={errors.number ? 'border border-Red' : ''}
+
+            />
+                  {errors.number?.type === 'required' && <span className='text-Red'>Can't be blank</span>}
+
+      {errors.number?.type === 'inNumeric' && <span className='text-Red'>Wrong format, numbers only</span>}
 
 
 
-      <div className='flex'>
+      <div className='flex mt-[18px]'>
         <div> 
              <label >EXP. DATE(MM/YY)</label>
-              <div className='flex mt-8px  mr-[20px]'>
+              <div className='flex  mt-8px  mr-[20px]'>
 
-               <input className='w-[75px]  mr-[10px] border border-gray-300' type="datetime" placeholder="MM"  maxLength={2} {...register("month", {required: true,validate: {
-              inNumeric: (value) => isNumeric(value),
-            },maxLength: 2,minLength:2})} />
-               {errors.month?.type === 'required' && <p>Can't be blank</p>}
-               {errors.month?.type === 'maxLength' && <p>el campo debe tener 2 caracteres</p>}
-               {errors.month?.type === 'minLength' && <p>el campo debe tener 2 caracteres</p>}
-               {errors.month?.type === 'inNumeric' && <p className='text-Red'>Wrong format, numbers only</p>}
-
-
-               <input className='w-[75px] border border-gray-300' type="datetime" placeholder="YY"  maxLength={2} {...register("year", {required: true,validate: {
-              inNumeric: (value) => isNumeric(value),
-            },maxLength: 2, minLength:2})} />
-               {errors.year?.type === 'required' && <p>Can't be blank</p>}
-               {errors.year?.type === 'maxLength' && <p>el campo debe tener 2 caracteres</p>}
-               {errors.year?.type === 'minLength' && <p>el campo debe tener 2 caracteres</p>}
-               {errors.year?.type === 'inNumeric' && <p className='text-Red'>Wrong format, numbers only</p>}
-
+                      <div>  
+                            <input className= {errors.month ? 'border border-Red w-[75px]  mr-[10px]' : 'w-[75px]  mr-[10px]'} type="datetime" placeholder="MM"  maxLength={2} {...register("month", {required: true,validate: {
+                            inNumeric: (value) => isNumeric(value),
+                          },maxLength: 2,minLength:2})} 
+                          
+                          />
+                            {errors.month?.type === 'required' && <span className='text-Red'>Can't be blank</span>}
+                            {/* {errors.month?.type === 'maxLength' && <span>el campo debe tener 2 caracteres</span>}
+                            {errors.month?.type === 'minLength' && <span>el campo debe tener 2 caracteres</span>} */}
+                            {errors.month?.type === 'inNumeric' && <span className='text-Red'>Wrong format, numbers only</span>}
+                        </div>
+                      <div> 
+                          <input className= {errors.year ? 'border border-Red w-[75px]  mr-[10px]' : 'w-[75px]  mr-[10px]'} type="datetime" placeholder="YY"  maxLength={2} {...register("year", {required: true,validate: {
+                          inNumeric: (value) => isNumeric(value),
+                        },maxLength: 2, minLength:2})} />
+                          {errors.year?.type === 'required' && <span className='text-Red'>Can't be blank</span>}
+                          {/* {errors.year?.type === 'maxLength' && <span>el campo debe tener 2 caracteres</span>}
+                          {errors.year?.type === 'minLength' && <span>el campo debe tener 2 caracteres</span>} */}
+                          {errors.year?.type === 'inNumeric' && <span className='text-Red'>Wrong format, numbers only</span>}
+                      </div>
               </div>
        </div>
-     <div>
-      <label htmlFor="">CVC</label>
-     <input className='w-full' type="text" placeholder="e.g.123"  maxLength={3} {...register("cvc", {required: true,validate: {
+       <div>
+            <label htmlFor="">CVC</label>
+            <input className= {errors.cvc ? 'border border-Red w-full' : ' w-full'} type="text" placeholder="e.g.123"  maxLength={3} {...register("cvc", {required: true,validate: {
               inNumeric: (value) => isNumeric(value),
             },maxLength: 3, minLength:3})} />
-        {errors.cvc?.type === 'required' && <p>Can't be blank</p>}
-               {errors.cvc?.type === 'maxLength' && <p>el campo debe tener 3 caracteres</p>}
-               {errors.cvc?.type === 'minLength' && <p>el campo debe tener 3 caracteres</p>}
-               {errors.cvc?.type === 'inNumeric' && <p className='text-Red'>Wrong format, numbers only</p>}
+               {errors.cvc?.type === 'required' && <span  className='text-Red'>Can't be blank</span>}
+               {/* {errors.cvc?.type === 'maxLength' && <span>el campo debe tener 3 caracteres</span>}
+               {errors.cvc?.type === 'minLength' && <span>el campo debe tener 3 caracteres</span>} */}
+               {errors.cvc?.type === 'inNumeric' && <span className='text-Red'>Wrong format, numbers only</span>}
 
      </div>
     
       </div>
-      <input className='bg-Very-dark-violet text-White font-700' type="submit" value="Confirm" />
+      <input className='input-confirm bg-Very-dark-violet text-White font-700' type="submit" value="Confirm" />
     </form>
   
           </div>
